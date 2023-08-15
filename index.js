@@ -101,19 +101,19 @@ let taskItemsWork = [];
 
 
 //** GET
-app.get("/", (req, res) => {
+app.get("/ToDoList-FEandBE/", (req, res) => {
   formAction = "/";
   res.render("index.ejs", { formAction:formAction, dateData: dateData, taskItems: taskItems, mainPage: true });
 }); 
 
-app.get("/work", (req, res) => {
+app.get("/ToDoList-FEandBE/work", (req, res) => {
   formAction = "/work";
   res.render("index.ejs", { formAction:formAction, dateData: dateData, taskItemsWork: taskItemsWork, workPage: true });
 }); 
 
 
 //** POST - New Task
-app.post("/", (req,res) => {
+app.post("/ToDoList-FEandBE/", (req,res) => {
   randomColor = colorArray[Math.floor(Math.random() * colorArray.length)];
   taskData = {
     newTask: req.body["task-description"],
@@ -121,10 +121,10 @@ app.post("/", (req,res) => {
   };
 
   taskItems.push(taskData);
-  res.redirect("/");
+  res.redirect("/ToDoList-FEandBE/");
 });
 
-app.post("/work", (req,res) => {
+app.post("/ToDoList-FEandBE/work", (req,res) => {
   randomColor = colorArray[Math.floor(Math.random() * colorArray.length)];
   taskData = {
     newTask: req.body["task-description"],
@@ -132,7 +132,7 @@ app.post("/work", (req,res) => {
   };
 
   taskItemsWork.push(taskData);
-  res.redirect("/work");
+  res.redirect("/ToDoList-FEandBE/work");
 });
 
 
