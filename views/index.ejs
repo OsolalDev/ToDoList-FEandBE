@@ -1,0 +1,63 @@
+<!-- HEADER -->
+<%- include("./partials/header.ejs") %>
+
+<!-- MAIN CONTENT -->
+<nav class="nav-bar">
+    <a class="nav-bar_btn" href="/">
+        <div class="nav-bar_btn_underline hide"></div>
+        <img class="nav-bar_btn_img" src="./images/calendar.png" alt="">
+        <p>Today</p>
+    </a>
+    <a class="nav-bar_btn" href="/work">
+        <div class="nav-bar_btn_underline hide"></div>
+        <img class="nav-bar_btn_img" src="./images/work.png" alt="">
+        <p>Work</p>
+    </a>
+</nav>
+<!--  -->
+<main>
+    <div class="content">
+        <div class="content_titles">
+            <!-- LOAD MAIN PAGE -->
+            <% if(locals.mainPage) { %>
+                <!-- TITLES -->
+                <h1>To Do - Checklist</h1>
+                <h2><%= dateData.strDay %>, <%= dateData.strMonth %> <%= dateData.day %></h2>
+
+                <!-- TASKS -->
+            <% taskItems.forEach(taskItem => { %>
+                <div class="content_to-do-list <%= taskItem.postItColor %>">
+                    <input class="content_to-do-list_cb" type="checkbox" name="cb">
+                    <p class="content_to-do-list_description"><%= taskItem.newTask %></p>
+                </div>
+            <% }); %>
+
+
+            <!-- LOAD WORK PAGE -->
+            <% } else if(locals.workPage) { %>
+                <!-- TITLES -->
+                <h1>To Do - Work List</h1>
+
+                <!-- TASKS -->
+                <% taskItemsWork.forEach(taskItemWork => { %>
+                <div class="content_to-do-list <%= taskItemWork.postItColor %>">
+                    <input class="content_to-do-list_cb" type="checkbox" name="cb">
+                    <p class="content_to-do-list_description"><%= taskItemWork.newTask %></p>
+                </div>
+                <% }); %>
+            <% } %>
+            
+
+             <!-- NEW TASK -->
+             <div class="content_new-task">
+                <form class="content_new-task_input" action="<%= formAction %>" method="post">
+                    <input class="content_new-task_input-text" type="text" name="task-description" placeholder="New Task" autocomplete="off">
+                    <button class="content_new-task_input-btn" type="submit" name="list" value="<%= dateData.strDay %>, <%= dateData.strMonth %> <%= dateData.day %>">+</button>
+                </form>
+            </div>
+        </div>      
+        
+    </div>
+
+<!-- FOOTER -->
+<%- include("./partials/footer.ejs") %>
